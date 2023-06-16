@@ -93,7 +93,7 @@ class KeyboardActions extends StatefulWidget {
       this.autoScroll = true,
       this.isDialog = false,
       @Deprecated('Use tapOutsideBehavior instead.')
-          this.tapOutsideToDismiss = false,
+      this.tapOutsideToDismiss = false,
       this.tapOutsideBehavior = TapOutsideBehavior.none,
       required this.config,
       this.overscroll = 12.0,
@@ -158,7 +158,10 @@ class KeyboardActionstate extends State<KeyboardActions>
           _keyParent.currentContext!.findRenderObject() as RenderBox;
       final fullHeight = MediaQuery.of(context).size.height;
       final widgetHeight = widgetRenderBox.size.height;
-      final widgetTop = widgetRenderBox.localToGlobal(Offset.zero).dy;
+      var widgetTop = widgetRenderBox.localToGlobal(Offset.zero).dy;
+      if (widgetTop.isNaN) {
+        widgetTop = 0;
+      }
       final widgetBottom = widgetTop + widgetHeight;
       final distanceBelowWidget = fullHeight - widgetBottom;
       return distanceBelowWidget;
